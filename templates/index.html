@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Michelle Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            overflow-y: auto;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        header {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h2 {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-size: 0.8em;
+            margin: 0;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .container {
+            flex: 1;
+            max-width: 90%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-box {
+            border: 2px solid #4CAF50;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            flex-grow: 1;
+            width: 100%;
+            min-width: 400px; /* Increased minimum width */
+        }
+        .chat-box p {
+            margin: 5px 0;
+        }
+        .user {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .bot {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        .input-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .input-box input {
+            width: 70%;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+        }
+        .input-box button {
+            width: 20%;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+            padding: 10px;
+            border: 2px solid #333;
+            font-size: 0.9em;
+        }
+        .input-box button:hover {
+            background-color: #e60000;
+        }
+        .keyboard {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 600px; /* Limit the width of the keyboard */
+            margin: 0 auto; /* Center the keyboard */
+        }
+        .keyboard button {
+            margin: 2px;
+            padding: 5px 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 40px;
+        }
+        @media (max-width: 768px) {
+            .input-box input {
+                width: 60%;
+            }
+            .input-box button {
+                width: 18%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to The Michelle Chatbot</h1>
+        <h2>By LearnTwi Consults</h2>
+        <p>Start chatting with Michelle below!</p>
+    </header>
+    <div class="container">
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+        <div class="input-box">
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button onclick="sendMessage()">Send</button>
+            <button onclick="toggleKeyboard()">Keyboard</button>
+        </div>
+        <div class="keyboard" id="keyboard">
+            <!-- Traditional keyboard layout with Asante-Twi characters -->
+            <button onclick="insertCharacter('Q')">Q</button>
+            <button onclick="insertCharacter('W')">W</button>
+            <button onclick="insertCharacter('E')">E</button>
+            <button onclick="insertCharacter('R')">R</button>
+            <button onclick="insertCharacter('T')">T</button>
+            <button onclick="insertCharacter('Y')">Y</button>
+            <button onclick="insertCharacter('U')">U</button>
+            <button onclick="insertCharacter('I')">I</button>
+            <button onclick="insertCharacter('O')">O</button>
+            <button onclick="insertCharacter('P')">P</button>
+            <button onclick="insertCharacter('Ɛ')">Ɛ</button>
+            <br>
+            <button onclick="insertCharacter('A')">A</button>
+            <button onclick="insertCharacter('S')">S</button>
+            <button onclick="insertCharacter('D')">D</button>
+            <button onclick="insertCharacter('F')">F</button>
+            <button onclick="insertCharacter('G')">G</button>
+            <button onclick="insertCharacter('H')">H</button>
+            <button onclick="insertCharacter('J')">J</button>
+            <button onclick="insertCharacter('K')">K</button>
+            <button onclick="insertCharacter('L')">L</button>
+            <button onclick="insertCharacter('Ɔ')">Ɔ</button>
+            <br>
+            <button onclick="insertCharacter('Z')">Z</button>
+            <button onclick="insertCharacter('X')">X</button>
+            <button onclick="insertCharacter('C')">C</button>
+            <button onclick="insertCharacter('V')">V</button>
+            <button onclick="insertCharacter('B')">B</button>
+            <button onclick="insertCharacter('N')">N</button>
+            <button onclick="insertCharacter('M')">M</button>
+            <br>
+            <button onclick="insertCharacter('1')">1</button>
+            <button onclick="insertCharacter('2')">2</button>
+            <button onclick="insertCharacter('3')">3</button>
+            <button onclick="insertCharacter('4')">4</button>
+            <button onclick="insertCharacter('5')">5</button>
+            <button onclick="insertCharacter('6')">6</button>
+            <button onclick="insertCharacter('7')">7</button>
+            <button onclick="insertCharacter('8')">8</button>
+            <button onclick="insertCharacter('9')">9</button>
+            <button onclick="insertCharacter('0')">0</button>
+            <br>
+            <button onclick="insertCharacter('!')">!</button>
+            <button onclick="insertCharacter('@')">@</button>
+            <button onclick="insertCharacter('#')">#</button>
+            <button onclick="insertCharacter('$')">$</button>
+            <button onclick="insertCharacter('%')">%</button>
+            <button onclick="insertCharacter('^')">^</button>
+            <button onclick="insertCharacter('&')">&</button>
+            <button onclick="insertCharacter('*')">*</button>
+            <button onclick="insertCharacter('(')">(</button>
+            <button onclick="insertCharacter(')')">)</button>
+            <br>
+            <button onclick="toggleShift()">Shift</button>
+        </div>
+    </div>
+    <footer>
+        <p>The Michelle | 123 Chatbot Lane | Botville | (347) 759-4392 | m_acheampong@yahoo.com</p>
+    </footer>
+
+    <script>
+        let isUpperCase = true;
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === '') return;
+
+            const chatBox = document.getElementById('chat-box');
+            const userMessage = document.createElement('p');
+            userMessage.className = 'user';
+            userMessage.textContent = 'User: ' + userInput;
+            chatBox.appendChild(userMessage);
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const botMessage = document.createElement('p');
+                botMessage.className = 'bot';
+                botMessage.textContent = 'Michelle: ' + data.response;
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            });
+
+            document.getElementById('user-input').value = '';
+        }
+
+        function toggleKeyboard() {
+            const keyboard = document.getElementById('keyboard');
+            keyboard.style.display = keyboard.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        function insertCharacter(char) {
+            const userInput = document.getElementById('user-input');
+            userInput.value += char;
+        }
+
+        function toggleShift() {
+            isUpperCase = !isUpperCase;
+            const buttons = document.querySelectorAll('.keyboard button');
+            buttons.forEach(button => {
+                if (button.textContent.length === 1 && isNaN(button.textContent)) {
+                    button.textContent = isUpperCase ? button.textContent.toUpperCase() : button.textContent.toLowerCase();
+                    button.setAttribute('onclick', `insertCharacter('${button.textContent}')`);
+                }
+            });
+        }
+
+        // Add an event listener for the "Enter" key
+        document.getElementById('user-input').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
