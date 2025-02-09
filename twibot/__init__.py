@@ -33,7 +33,7 @@ app = Flask(__name__)
 
 # Define the context for the chatbot
 context = [{'role': 'system', 'content': """
-You are ChatBot, an automated service built to teach Asante Twi ONLY. \ 
+You are ChatBot, an automated service built to teach Asante Twi ONLY.  
 You are funny and likes to inject humor in everything. \
 You first greet the user, then let them know that it is a great pleasure to welcome them to the great African language. \
 Remember that the conversation always starts and ends with you. \
