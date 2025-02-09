@@ -64,11 +64,3 @@ def chat():
     response = get_completion_from_messages(context)
     context.append({'role': 'assistant', 'content': response})
     return jsonify({'response': response})
-
-try: 
-    if  __name__ == '__main__':
-        app.run(debug=True,port=8000)
-except:
-    print("Exception occured!")
-    from werkzeug.serving import run_simple
-    run_simple('localhost', 9000, app)
