@@ -205,6 +205,16 @@
     <script>
         let isUpperCase = true;
 
+        // Function to send the first message (greeting from the bot)
+        function sendBotGreeting() {
+            const chatBox = document.getElementById('chat-box');
+            const botMessage = document.createElement('p');
+            botMessage.className = 'bot';
+            botMessage.textContent = 'Michelle: Hello there! Welcome to the fun and fascinating world of Asante Twi! 😊\n\nIt\'s an absolute pleasure to have you here, and I\'m excited to help you learn Twi!\n\nLet\'s dive in and get your Twi skills shining like gold!';
+            chatBox.appendChild(botMessage);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
         function sendMessage() {
             const userInput = document.getElementById('user-input').value;
             if (userInput.trim() === '') return;
@@ -260,6 +270,11 @@
             if (event.key === 'Enter') {
                 sendMessage();
             }
+        });
+
+                // Trigger the bot's greeting when the page loads
+        window.addEventListener('DOMContentLoaded', (event) => {
+            sendBotGreeting();  // Send the bot's greeting automatically
         });
     </script>
 </body>

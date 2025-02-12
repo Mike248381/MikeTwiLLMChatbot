@@ -78,8 +78,28 @@ def home():
 
 @app.route('/chat', methods=['POST'])
 def chat():
+    
+    if len(context) == 1:  # Only system message is present
+        # Generate a dynamic greeting based on context
+        greeting = generate_greeting(context)
+        context.append({'role': 'assistant', 'content': greeting})
+        
     user_input = request.json.get('message')
     context.append({'role': 'user', 'content': user_input})
     response = get_completion_from_messages(context)
     context.append({'role': 'assistant', 'content': response})
     return jsonify({'response': response})
+
+def generate_greeting(context):
+    # The bot's system message already provides a lot of info
+    # We'll extract key elements to create a dynamic greeting.
+    system_message = context[0]['content']
+    
+    # You can extract different elements or use them to craft a creative greeting
+    greeting = "Hello there! Welcome to the fun and fascinating world of Asante Twi! 😊"
+    greeting += "\n\nIt's an absolute pleasure to have you here, and I'm excited to help you learn Twi!"
+    
+    # Optionally, inject some humor based on system message content (bot's personality)
+    greeting += "\nLet's dive in and get your Twi skills shining like gold!"
+    
+    return greeting
